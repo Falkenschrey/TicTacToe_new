@@ -81,8 +81,6 @@ public class TicTacToe implements ActionListener{
         }
     }
 
-
-
     public void firstTurn() {
 
         try {
