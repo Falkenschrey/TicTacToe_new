@@ -1,12 +1,13 @@
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 
 public class TicTacToe implements ActionListener{
 
+    public static int ScoreCh;
+    public static int ScoreCr;
     Random random = new Random();
     JFrame frame = new JFrame();
     JPanel title_panel = new JPanel();
@@ -16,6 +17,7 @@ public class TicTacToe implements ActionListener{
     boolean player1_turn;
     ImageIcon Crusader = new ImageIcon("src/res/Malthese.png");
     ImageIcon Chaos = new ImageIcon("src/res/ChaosStar.png");
+
 
     TicTacToe() {
 
@@ -96,6 +98,20 @@ public class TicTacToe implements ActionListener{
         } else {
             player1_turn = false;
             textfield.setText("Chaos turn, let the Galaxy burn!");
+        }
+    }
+
+    public void Dialog() {
+        int value = JOptionPane.showConfirmDialog(null, "The game is over, do you want to start a new game?\n"
+                        + "Score:\n" + "Chaos: " + ScoreCh + " - Crusader: " + ScoreCr, "New Game?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (value == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        } else if (value == JOptionPane.YES_OPTION) {
+            this.frame.dispose();
+            new TicTacToe();
+        } else if (value == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
         }
     }
 
@@ -211,6 +227,8 @@ public class TicTacToe implements ActionListener{
         }
         textfield.setFont(new Font("Chiller", Font.BOLD,32));
         textfield.setText("Chaos has won! Death to the false emperor!");
+        ScoreCh++;
+        Dialog();
         //Chiller
     }
 
@@ -224,6 +242,8 @@ public class TicTacToe implements ActionListener{
         }
         textfield.setFont(new Font("Old English Text MT", Font.BOLD,32));
         textfield.setText("Crusaders won! No Pity! No Remorse! No Fear!");
+        ScoreCr++;
+        Dialog();
         //Castellar
     }
 
